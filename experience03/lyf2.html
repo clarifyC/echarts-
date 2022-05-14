@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lyf</title>
+    <script type="text/javascript" src="./echarts_min.js"></script>
+</head>
+<body>
+<div id="main" style="width: 800px;height:500px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'),);
+    option = {
+        backgroundColor: '#ffc6d0',
+        series: [
+            {
+                name:'销售任务额',
+                type: 'gauge',
+                endAngle: 50,
+                min: 1800000,
+                max: 12000000,
+                splitNumber: 10,
+                center: ['33%', '50%'],
+                startAngle: 230,
+                radius: "60%",
+                title: {
+                    show: true,
+                    offsetCenter: [0, -50],
+                    color: "black",
+                    fontSize: 20,
+                    fontWeight: 'bolder',
+                },
+                anchor: {
+                    show: true,
+                    showAbove: true,
+                    size: 12,
+                    itemStyle: {
+                        color: "red",
+                        borderColor: "rgba(0, 0, 0, 1)",
+                        borderWidth: 3,
+                        borderType: "solid",
+                        shadowColor: "rgba(255, 255, 255, 1)",
+                        shadowBlur: 10,
+                    }
+                },
+                pointer: {
+                    show: true,
+                    showAbove: true,
+                    length:"70%",
+                    itemStyle: {
+                        color: "red"
+                    },
+                },
+                tooltip: {
+                    show:true,
+                    formatter: '{a} <br/>{b} : {c}%'
+                },
+                axisLine: {
+                    lineStyle: {
+                        width: 9,
+                        color: [
+                            [0.5, 'red'],
+                            [0.8, 'blue'],
+                            [1, 'green'],
+
+                        ],
+                    }
+                },
+                axisTick: {
+                    distance: 0,
+                    length: 5,
+                    splitNumber: 5,
+                    lineStyle: {
+                        width: 1,
+                        color: '#fff'
+                    }
+                },
+                splitLine: {
+                    distance: 3,
+                    length: 15,
+                    lineStyle: {
+                        width: 2,
+                        color: '#fff'
+                    }
+                },
+                axisLabel: {
+                    distance: 5,
+                    color: 'black',
+                    fontSize: 7,
+                },
+                progress: {
+                    show: false,
+                },
+                detail: {
+                    show:true,
+                    valueAnimation: true,
+                    lineHeight: 40,
+                    borderRadius: 7,
+                    fontSize: 14,
+                    width: '60%',
+                    fontWeight: 'bolder',
+                    color: 'auto'
+                },
+                data: [
+                    {
+                        name:'销售任务额',
+                        value: 12000000,
+                    }
+                ]
+            },
+            {
+                name:'销售额',
+                type: 'gauge',
+                center: ['61%', '55%'],
+                startAngle: 210,
+                endAngle: -30,
+                min: 1600000,
+                max: 10000000,
+                splitNumber: 12,
+                radius: "70%",
+                title: {
+                    show: true,
+                    fontWeight: 'bolder',
+                    color: "black",
+                    fontSize: 20,
+                },
+                tooltip: {
+                    show:true,
+                    formatter: '{a} <br/>{b} : {c}%'
+                },
+                axisLine: {
+                    lineStyle: {
+                        width: 9,
+                        color: [
+                            [0.5, 'red'],
+                            [0.8, 'blue'],
+                            [1, 'green'],
+
+                        ],
+                    }
+                },
+                axisTick: {
+                    distance: 0,
+                    length: 9,
+                    splitNumber: 5,
+                    lineStyle: {
+                        width: 1,
+                        color: '#fff'
+                    }
+                },
+                splitLine: {
+                    distance: 3,
+                    length: 15,
+                    lineStyle: {
+                        width: 2,
+                        color: '#fff'
+                    }
+                },
+                axisLabel: {
+                    distance: 6,
+                    color: 'black',
+                    fontSize: 6
+                },
+                detail: {
+                    show:true,
+                    valueAnimation: true,
+                    width: '60%',
+                    lineHeight: 40,
+                    borderRadius: 7,
+                    offsetCenter: [0, '25%'],
+                    fontSize: 20,
+                    fontWeight: 'bolder',
+                    color: 'auto'
+                },
+                pointer: {
+                    show: true,
+                    showAbove: true,
+                    length:"80%",
+                    itemStyle: {
+                        color: "auto"
+                    },
+                },
+                data: [
+                    {
+                        name:'销售额',
+                        value: 10000000,
+                    }
+                ]
+            },
+
+
+        ],
+    };
+
+    setInterval(function () {
+        const random1 = +(Math.random() * 10000000).toFixed(2);
+        const random2 = +(Math.random() * 12000000).toFixed(2);
+        option.series[0].data[0].value = random1;
+        option.series[1].data[0].value = random2;
+        myChart.setOption(option,true);
+    }, 2000);
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+
+</script>
+</body>
+</html>

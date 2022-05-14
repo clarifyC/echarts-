@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lyf</title>
+    <script type="text/javascript" src="./echarts.js"></script>
+</head>
+<body>
+<div id="main" style="width: 1000px;height:600px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'),);
+    option = {
+        backgroundColor: new echarts.graphic.RadialGradient(0.4, 0.4, 1, [
+            {
+                offset: 0,
+                color: 'white'
+            },
+            {
+                offset: 1,
+                color: '#fff306'
+            }
+        ]),
+        title: [
+            {
+                text: '游侠',
+                left: '20%',
+            },
+            {
+                text: '赛博爆裂',
+                left: '70%',
+            },
+            {
+                text: '烈焰红旗',
+                left: '20%',
+                top: '50%',
+            },
+            {
+                text: '性能对比',
+                left: '70%',
+                top: '47%',
+            },
+
+        ],
+        legend: {
+            show: true,
+            bottom: 'bottom',
+            data: [
+                {name: '游侠', itemStyle: {color: 'red'}},
+                {name: '烈焰红旗', itemStyle: {color: 'green'}},
+                {name: '赛博爆裂', itemStyle: {color: 'blue'}},
+            ],
+        },
+        tooltip: {
+            trigger: 'item'
+        },
+        radar: [
+            {
+                name: '游侠',
+                center: ['25%', '25%'],
+                radius: 75,
+                indicator: [
+                    {text: '加速', max: 60},
+                    {text: '速度时间', max: 60},
+                    {text: '敏捷', max: 60},
+                    {text: '弯道漂移', max: 60},
+                    {text: '强化力量', max: 60},
+                    {text: '集气', max: 60},
+                    {text: '转向车速', max: 60},
+                    {text: '拖漂', max: 60},
+                ],
+                axisName: {
+                    color: 'white',
+                    backgroundColor: 'red',
+                    borderRadius: 3,
+                    padding: [3, 5]
+                },
+            },
+            {
+                name: '赛博爆裂',
+                center: ['75%', '25%'],
+                radius: 75,
+                indicator: [
+                    {text: '加速', max: 60},
+                    {text: '速度时间', max: 60},
+                    {text: '敏捷', max: 60},
+                    {text: '弯道漂移', max: 60},
+                    {text: '强化力量', max: 60},
+                    {text: '集气', max: 60},
+                    {text: '转向车速', max: 60},
+                    {text: '拖漂', max: 60},
+                ],
+                axisName: {
+                    formatter: '{value}',
+                    color: 'white',
+                    backgroundColor: 'blue',
+                    borderRadius: 3,
+                    padding: [3, 5],
+                },
+            },
+            {
+                name: '烈焰红旗',
+                center: ['25%', '75%'],
+                radius: 75,
+                indicator: [
+                    {text: '加速', max: 60},
+                    {text: '速度时间', max: 60},
+                    {text: '敏捷', max: 60},
+                    {text: '弯道漂移', max: 60},
+                    {text: '强化力量', max: 60},
+                    {text: '集气', max: 60},
+                    {text: '转向车速', max: 60},
+                    {text: '拖漂', max: 60},
+                ],
+                axisName: {
+                    formatter: '{value}',
+                    color: 'white',
+                    backgroundColor: 'green',
+                    borderRadius: 3,
+                    padding: [3, 5],
+                },
+            },
+            {
+                center: ['75%', '75%'],
+                radius: 100,
+                shape: 'circle',
+                indicator: [
+                    {text: '加速', max: 60},
+                    {text: '速度时间', max: 60},
+                    {text: '敏捷', max: 60},
+                    {text: '弯道漂移', max: 60},
+                    {text: '强化力量', max: 60},
+                    {text: '集气', max: 60},
+                    {text: '转向车速', max: 60},
+                    {text: '拖漂', max: 60},
+                ],
+                splitArea: {
+                    areaStyle: {
+                        color: [new echarts.graphic.RadialGradient(0.4, 0.4, 1, [
+                            {
+                                offset: 0,
+                                color: 'white'
+                            },
+                            {
+                                offset: 1,
+                                color: 'orange'
+                            }
+                        ]),],
+
+                    }
+                },
+                axisName: {
+                    formatter: '{value}',
+                    color: 'white',
+                    backgroundColor: 'black',
+                    borderRadius: 3,
+                    padding: [3, 5],
+                },
+            },
+        ],
+        series: [
+            {
+                name: '游侠',
+                type: 'radar',
+                tooltip: {
+                    trigger: 'item'
+                },
+                areaStyle: {},
+                data: [
+                    {
+                        value: [57.97, 56.78, 52.96, 56.02, 52.15, 56.46, 54.05, 42.52],
+                        name: '游侠',
+                        areaStyle: {
+                            color: 'rgba(255, 0, 0, 0.5)',
+                        },
+                        itemStyle: {
+                            color: "red"
+                        },
+                        lineStyle: {
+                            color: 'red',
+                        },
+                    }
+                ]
+            },
+
+            {
+                name: '赛博爆裂',
+                type: 'radar',
+                radarIndex: 1,
+                areaStyle: {},
+                data: [
+                    {
+                        name: '赛博爆裂',
+                        value: [43.61, 41.79, 40.01, 48.43, 41.99, 48.22, 45.53, 44.51],
+                        areaStyle: {
+                            color: 'rgba(0, 0, 255, 0.5)',
+                        },
+                        itemStyle: {
+                            color: "blue",
+                        },
+                        lineStyle: {
+                            color: 'blue',
+                        },
+                    },
+                ]
+            },
+            {
+                name: '烈焰红旗',
+                type: 'radar',
+                radarIndex: 2,
+                areaStyle: {},
+                data: [
+                    {
+                        value: [51.51, 54.47, 49.05, 53.55, 48.18, 53.54, 50.5, 42.83],
+                        name: '烈焰红旗',
+                        areaStyle: {
+                            color: 'rgba(0, 255, 0, 0.5)',
+                        },
+                        itemStyle: {
+                            color: "green"
+                        },
+                        lineStyle: {
+                            color: 'green',
+                        },
+                    },
+                ]
+            },
+            {
+                name: '性能对比',
+                type: 'radar',
+                radarIndex: 3,
+                data: [
+                    {
+                        value: [57.97, 56.78, 52.96, 56.02, 52.15, 56.46, 54.05, 42.52],
+                        name: '游侠',
+                        lineStyle: {
+                            color: 'red',
+                        },
+                        itemStyle: {
+                            color: "red",
+                        },
+                    },
+                    {
+                        value: [51.51, 54.47, 49.05, 53.55, 48.18, 53.54, 50.5, 42.83],
+                        name: '烈焰红旗',
+                        itemStyle: {
+                            color: "green",
+                        },
+                        lineStyle: {
+                            color: 'green',
+                        },
+                    },
+                    {
+                        name: '赛博爆裂',
+                        value: [43.61, 41.79, 40.01, 48.43, 41.99, 48.22, 45.53, 44.51],
+                        itemStyle: {
+                            color: "blue",
+                        },
+                        lineStyle: {
+                            color: 'blue',
+                        },
+                    },
+                ]
+            }
+        ]
+    };
+
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+
+</script>
+</body>
+</html>

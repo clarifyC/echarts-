@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+    <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+<div id="container" style="height: 100%"></div>
+
+
+<script type="text/javascript" src="./echarts_min.js"></script>
+<script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+        renderer: 'canvas',
+        useDirtyRect: false
+    });
+    var option;
+
+    const data = [
+        [
+            [87607, 20, '苏州', 1047],
+            [62593, 16.24, '南京', 800],
+            [33412, 13.29, '徐州', 858],
+            [46931, 22.41, '南通', 728],
+            [90355, 19.36, '无锡', 637],
+            [31215, 16.15, '盐城', 726],
+            [64824, 18.8, '常州', 459],
+            [21529, 12.4, '宿迁', 472],
+            [26191, 12.12, '连云港', 439],
+            [49509, 18.42, '扬州', 446],
+            [28023, 13.3, '淮安', 480],
+            [43359, 20.03, '泰州', 462],
+            [62846, 18.48, '镇江', 311]
+        ],
+        [
+            [187634, 16.96, '苏州', 1275],
+            [174216, 18.98, '南京', 932],
+            [82938, 19.51, '徐州', 908],
+            [137145, 22.67, '南通', 773],
+            [187632, 14.65, '无锡', 746],
+            [80633, 19.88, '盐城', 671],
+            [164807, 14.88, '常州', 528],
+            [66068, 18.58, '宿迁', 499],
+            [72646, 14.63, '连云港', 460],
+            [132960, 19.99, '扬州', 456],
+            [81608, 16.42, '淮安', 456],
+            [114580, 22.01, '泰州', 451],
+            [131734, 17.51, '镇江', 321]
+        ],
+    ];
+    option = {
+        backgroundColor: new echarts.graphic.RadialGradient(0.5, 0.5, 1, [
+                {
+                    offset: 0,
+                    color: '#FFFB00'
+                },
+                {
+                    offset: 1,
+                    color: '#FFAB00'
+                }
+        ]),
+        title: {
+            text: '江苏省各市普查数据（2010年，2020年）',
+
+        },
+        legend: {
+            right: '10%',
+            top: '3%',
+            data: ['2010', '2020']
+        },
+        grid: {
+            left: '8%',
+            top: '10%'
+        },
+        xAxis: {
+            name: "人均GDP（元）",
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            }
+        },
+        yAxis: {
+            name: "老龄率（%）",
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            },
+            scale: true
+        },
+        series: [
+            {
+                name: '2010',
+                data: data[0],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[3]*4);
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[2]+'2010年';
+                        },
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(120, 36, 50, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
+                        {
+                            offset: 0,
+                            color: 'rgb(251, 118, 123)'
+                        },
+                        {
+                            offset: 1,
+                            color: 'rgb(204, 46, 72)'
+                        }
+                    ])
+                }
+            },
+            {
+                name: '2020',
+                data: data[1],
+                type: 'scatter',
+                symbolSize: function (data) {
+                    return Math.sqrt(data[3]*4);
+                },
+                emphasis: {
+                    focus: 'series',
+                    label: {
+                        show: true,
+                        formatter: function (param) {
+                            return param.data[2]+'2020年';
+                        },
+                        position: 'inside'
+                    }
+                },
+                itemStyle: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [
+                        {
+                            offset: 0,
+                            color: 'rgb(129, 227, 238)'
+                        },
+                        {
+                            offset: 1,
+                            color: 'rgb(25, 183, 207)'
+                        }
+                    ])
+                }
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+</script>
+</body>
+</html>

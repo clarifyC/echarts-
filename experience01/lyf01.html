@@ -1,0 +1,107 @@
+<html>
+<head>
+    <script type="text/javascript" src="./echarts.js"></script>
+    <meta charset="utf-8">
+    <title>lyf-question01</title>
+</head>
+<body>
+<div id="main" style="width: 900px;height:600px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            formatter: '{a} <br/>{b}: {c} (占比{d}%)'
+        },
+        legend: {
+            orient: "vertical",
+            itemHeight:20,
+            itemWidth:20,
+            itemGap:40,
+            x:"right",
+            y:'bottom',
+            backgroundColor: "yellow",
+            borderColor: "grey",
+            borderWidth: 2,
+            type: "scroll",
+            textStyle: {
+                color:'green',
+                fontFamily:"宋体",
+                fontSize:20,
+            },
+            data:['广州','深圳','佛山','上海','苏州','杭州','武汉','郑州','合肥','北京','天津','青岛']
+        },
+        title: {
+            text: "某大型企业销售情况分布",
+            link: 'http://www.jstu.edu.cn/',
+            left: "center",
+            subtext: "2021年数据",
+            target: 'blank',
+            top: "top",
+            subtextStyle: {
+                fontSize: 15,
+                fontFamily: "黑体",
+                color: "white"
+            },
+            textStyle: {
+                fontSize: 25,
+                color: "yellow",
+                fontFamily: "宋体"
+            },
+            borderColor: "rgba(255, 0, 0, 1)",
+            borderWidth: 5,
+            backgroundColor: "rgba(193, 193, 193, 1)",
+            padding: [10, 10, 10, 10]
+        },
+        series: [
+            {
+                name: '区域',
+                type: 'pie',
+                radius: ["5%", '30%'],
+                selectedMode: 'single',
+                label: {
+                    position: 'inner',
+                    fontSize: 14,
+                    color: 'white'
+
+                },
+                data: [
+                    {value: 495, name: '华南'},
+                    {value: 738, name: '华东', selected: true},
+                    {value: 351, name: '华中'},
+                    {value: 476, name: '华北'}
+                ]
+            },
+            {
+                name: '城市',
+                type: 'pie',
+                selectedMode: 'multiple',
+                radius: ['40%', '60%'],
+                label: {
+                    color: 'auto'
+                },
+                data: [
+                    {value: 106, name: '广州'},
+                    {value: 280, name: '深圳'},
+                    {value: 109, name: '佛山'},
+                    {value: 280, name: '上海', selected: true},
+                    {value: 248, name: '苏州', selected: true},
+                    {value: 210, name: '杭州', selected: true},
+                    {value: 111, name: '武汉'},
+                    {value: 100, name: '郑州'},
+                    {value: 140, name: '合肥'},
+                    {value: 189, name: '北京'},
+                    {value: 133, name: '天津'},
+                    {value: 154, name: '青岛'},
+                ]
+            }
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<html>
+<head>
+    <script type="text/javascript" src="./echarts.js"></script>
+    <meta charset="utf-8">
+    <title>lyf-question02</title>
+</head>
+<body>
+<div id="main" style="width: 1200px;height:600px;"></div>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title: {
+            text: '2018-2019年1至11月新能源汽车销量情况',
+            subtext: '来源：中汽协',
+            left: "center",
+            top: "top",
+            backgroundColor:'#CBE9F0',
+            itemGap: 10,
+            subtextStyle: {
+                fontSize: 13,
+                fontFamily: "黑体",
+                color: "grey"
+            },
+            textStyle: {
+                fontSize: 20,
+                color: "black",
+                fontFamily: "黑体"
+            },
+        },
+        grid: {
+            show: true,
+            backgroundColor: "#EFD7DC",
+            borderWidth: 10,
+            borderColor: "grey",
+        },
+        tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            borderWidth: 0,
+            trigger: 'axis',
+            formatter:'月份：{b}<br/>{a}：{c}万辆<br/>{a1}：{c1}万辆<br/>{a2}：{c2}%',
+            axisPointer: {
+                type: "shadow",
+                color:'red'
+            },
+            textStyle: {
+                color: "white"
+            },
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                dataView: {show: true, readOnly: false},
+                saveAsImage: {
+                    show:true,
+                    name: "CarSale",
+                    type: "jpeg",
+                }
+            }
+        },
+        legend: {
+            show:true,
+            left:'10%',
+            y:'bottom',
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                // prettier-ignore
+                data: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+                axisTick:{
+                    show:true,
+                    length:25,
+                    lineStyle:{
+                        color:'pink',
+                        type:'solid',
+                        width:5,
+                    }
+                },
+                axisLine:{
+                    show:true,
+                    lineStyle: {
+                        type:'dashed',
+                        width:5,
+                        color:'black',
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'grey',
+                        width: 2,
+                        type:'dotted'
+                    }
+                },
+                axisLabel: {
+                    show:true,
+                    formatter: '{value}月份',
+                    textStyle: {
+                        color: 'green',
+                        fontSize: '15',
+                        fontFamily: '宋体',
+                        fontWeight: 'bold'
+                    }
+                },
+
+            }
+        ],
+        yAxis: [
+            {
+                name:'销量',
+                type: 'value',
+                position: 'left',
+                axisLine:{
+                    show:true,
+                    lineStyle: {
+                        color:'black',
+                        type:'solid',
+                        width:1,
+                    }
+                },
+                splitLine: {
+                    show: true,
+                    lineStyle: {
+                        color: 'grey',
+                        width: 2,
+                        type:'dotted'
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}万辆',
+                    textStyle: {
+                        color: 'grey',
+                        fontSize: '10',
+                    }
+                },
+                axisTick:{
+                    show:true,
+                    length:5,
+                    lineStyle:{
+                        color:'black',
+                        type:'solid',
+                        width:1,
+                    }
+                },
+            },
+            {
+                name:'增长率',
+                type: 'value',
+                position: 'right',
+                axisLine:{
+                    show:true,
+                    lineStyle: {
+                        color:'black',
+                        type:'solid',
+                        width:1,
+                    }
+                },
+                axisLabel: {
+                    formatter: '{value}%',
+                    textStyle: {
+                        color: 'grey',
+                        fontSize: '10',
+                    }
+                },
+                axisTick:{
+                    show:true,
+                    length:5,
+                    lineStyle:{
+                        color:'black',
+                        type:'solid',
+                        width:1,
+                    }
+                },
+                splitLine: {
+                    show: false,
+                },
+            },
+        ],
+        series: [
+            {
+                name: '2018年销量',
+                type: 'bar',
+                data: [
+                    3.8,3.4,6.8,8.2,10.2,8.4,8.4,10.1,12.1,13.8,16.9
+                ],
+                itemStyle:{
+                    color:'#fb7756',
+                    borderRadius: [7, 7, 0, 0],
+                },
+                markPoint: {
+                    data: [{
+                        type: "max"
+                    }],
+                    symbol: "circle",
+                    symbolSize: 25,
+                    itemStyle: {
+                        color: "#75e8e7"
+                    }
+                },
+                label:{
+                    show:true,
+                    position:'inside',
+                },
+            },
+            {
+                name: '2019年销量',
+                type: 'bar',
+                data: [
+                    9.6,5.3,11.4,9.7,10.4,15.2,8,8.5,8,7.5,9.5
+                ],
+                label:{
+                    show:true,
+                    position:'inside',
+                },
+                markPoint: {
+                    data: [{
+                        type: "max"
+                    }],
+                    symbol: "pin",
+                    symbolSize: 25,
+                    itemStyle: {
+                        color: "#64379f"
+                    }
+                },
+                itemStyle:{
+                    color:'#54d2d2',
+                    borderRadius: [7, 7, 0, 0],
+                },
+            },
+            {
+                name: '2019年同比增长率',
+                smooth:true,
+                yAxisIndex: 1,
+                type: 'line',
+                data: [
+                    152.6,55.9,67.6,18.3,2.0,81.0,-4.8,-15.8,-33.9,-45.6,-43.8
+                ],
+                lineStyle:{
+                    color:'#7C7484',
+                },
+                markPoint: {
+                    data: [{
+                        type: "min"
+                    }],
+                    label: {
+                        show: true,
+                        position: "top",
+                    },
+                    itemStyle: {
+                        color: "#30696C"
+                    },
+                    symbol: "triangle",
+                    symbolSize: 25,
+                },
+                markLine: {
+                    lineStyle: {
+                        color: "#30696C",
+                        width: 2.5
+                    },
+                    data: [{
+                        type: "average"
+                    }],
+                }
+            },
+        ]
+    };
+
+    if (option && typeof option === 'object') {
+        myChart.setOption(option);
+    }
+
+</script>
+</body>
+</html>
