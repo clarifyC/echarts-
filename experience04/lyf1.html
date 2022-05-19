@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src='./js/echarts.js'></script>
+    <script src='./js/shine.js'></script>
+    <script src='./js/macarons.js'></script>
+    <script src='./js/roma.js'></script>
+    <script src="./js/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+<div id="themeArea"><label>ECharts主题切换：</label></div>
+<select name="" id="sel">
+    <option value="shine">shine</option>
+    <option value="dark">dark</option>
+    <option value="macarons">macarons</option>
+    <option value="roma">roma</option>
+</select>
+<div id="main" style="width: 1200px; height: 500px"></div>
+<script type="text/javascript">
+    //基于准备好的dom，初始化ECharts图表
+    var myChart = echarts.init(document.getElementById("main"), 'shine');
+    var option = {  //指定图表的配置项和数据
+        tooltip: {trigger: 'axis'},
+        legend: {data: ['降水量', '蒸发量', '温度'], left: 'center', top: 25},
+        title: [
+            {
+                text: '温度与降水量、蒸发量的关系分析',
+                left:'38%'
+            },
+        ],
+        xAxis: [
+            {
+                type: 'category',
+                data: ['1月', '2月', '3月', '4月', '5月', '6月',
+                    '7月', '8月', '9月', '10月', '11月', '12月']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value', name: '水量', min: 0, max: 200,
+                position: 'right',
+                offset: 0,
+                axisLabel: {formatter: '{value} ml'}
+            },
+            {
+                type: 'value', name: '温度',
+                min: 0, max: 30, interval: 5,
+                axisLabel: {formatter: '{value}℃ '}
+            },
+
+        ],
+        series: [
+            {
+                name: '降水量', type: 'bar',
+                data: [2.6, 5.9, 9, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6, 2.3],
+            },
+            {
+                name: '蒸发量', type: 'bar',
+                data: [2, 4.9, 7, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20, 6.4, 3.3],
+            },
+            {
+                name: '温度', type: 'line',
+                yAxisIndex: 1,
+                data: [2, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23, 16.5, 12, 6.2]
+            }
+        ]
+    };
+    myChart.setOption(option);
+    myChart.on('dblclick', function (params) {
+        let d = params.seriesName=='温度'?'℃':'ml';
+        var yt = alert("鼠标双击事件,您刚才双击的" + params.name + params.seriesName + "为：" + params.data + d);
+        window.open('https://www.baidu.com/s?wd=' + encodeURIComponent('常州' + params.name + params.seriesName));
+    });
+    window.addEventListener("resize", function () {
+        myChart.resize();
+    });
+    $('#sel').change(function () {
+        myChart.dispose();
+        let Theme = $(this).val();
+        myChart = echarts.init(document.getElementById('main'), Theme);
+        myChart.on('dblclick', function (params) {
+            let d = params.seriesName=='温度'?'℃':'ml';
+            var yt = alert("鼠标双击事件,您刚才双击的" + params.name + params.seriesName + "为：" + params.data + d);
+            window.open('https://www.baidu.com/s?wd=' + encodeURIComponent('常州' + params.name + params.seriesName));
+        });
+        window.addEventListener("resize", function () {
+            myChart.resize();
+        });
+        myChart.setOption(option);
+    });
+
+</script>
+</body>
+</html>

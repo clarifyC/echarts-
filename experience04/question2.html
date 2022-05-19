@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src='./js/echarts.js'></script>
+    <script src="./js/jquery-3.3.1.js"></script>
+</head>
+
+<body>
+<div id="main1" style="width: 600px; height:400px"></div>
+<div id="main2" style="width: 600px; height:350px"></div>
+<script type="text/javascript">
+    //基于准备好的dom，初始化ECharts图表
+    var myChart1 = echarts.init(document.getElementById("main1"));
+    var myChart2 = echarts.init(document.getElementById("main2"));
+
+    var option1 = {  //指定第1个图表option1的配置项和数据
+        color: ['red', 'Lime', 'blue', 'DarkGreen', 'DarkOrchid', 'Navy'],
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',  //配置背景色，rgba设置透明度0.1
+        title: {text: '咖啡店各年订单占比情况', x: 'center', y: 12},
+        tooltip: {trigger: "item", formatter: "{a}<br/>{b}:{c}({d}%)"},
+        legend: {
+            orient: 'vertical', x: 15, y: 15,
+        },
+        series: [{  //配置第1个图表的数据系列
+            name: '总订单量:', type: 'pie',
+            radius: '70%', center: ['50%', 190],
+            data:[],
+        }]
+    };
+
+    //基于准备好的dom，初始化ECharts图表
+
+    var option2 = {  //指定第2个图表的配置项和数据
+        color: ['red', 'Lime', 'blue', 'DarkGreen', 'DarkOrchid', 'Navy'],
+        backgroundColor: 'rgba(128, 128, 128, 0.1)',  //配置背景色，rgba设置透明度0.1
+        tooltip: {trigger: 'axis', axisPointer: {type: 'shadow'}},  //配置提示框组件
+        legend: {  //配置图例组件
+            left: 42, top: 25,
+            data: ['Milk Tea', 'Matcha Latte', 'Cheese Cocoa', 'Walnut Brownie'],
+        },
+        toolbox: {  //配置第2个图表的工具箱组件
+            show: true, orient: 'vertical', left: 550, top: 'center',
+            feature: {
+                mark: {show: true}, restore: {show: true}, saveAsImage: {show: true},
+                magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']}
+            }
+        },
+        xAxis: [{
+            type: 'category',
+            data: ['2012', '2013', '2014', '2015', '2016', '2017'],
+        }],  //配置第2个图表的x轴坐标系
+        yAxis: [{type: 'value', splitArea: {show: true}}],  //配置第2个图表的y轴坐标系
+        series:[],
+    };
+    myChart1.setOption(option1);  //使用指定的配置项和数据显示饼图
+    myChart2.setOption(option2);  //使用指定的配置项和数据显示堆叠柱状图
+    // 多图表联动配置方法1：分别设置每个echarts对象的group值
+    myChart1.group = 'xxx';
+    myChart2.group = 'xxx';
+    echarts.connect('xxx');
+    // 多图表联动配置方法2：直接传入需要联动的echarts对象myChart1，myChart2
+    // echarts.connect([myChart1,myChart2]);
+
+    /**************************************************
+     获取JSON中的数据
+     ***************************************************/
+    $.get("./data/咖啡店各年订单.json").done(function (data) {
+        var d = data;
+        var order_proportion = d.data  //设置男生数组
+        var yaxis_name = d.product;  //设置女生数组
+        var series_data = [];  //设置专业名称数组
+        //循环获取男生数量、女生数量及专业名称
+        for (var i = 0; i < 4; i++) {
+            var nameId = 'names' + (i + 1);
+            var valueId = 'values' + (i + 1);
+            var one_line = {name: d[nameId], type: 'line', 'data': d[valueId]};
+            series_data.push(one_line);
+        }
+        //--------------将数据添加到数据图表中-----------------------------------
+        option1.series[0].data = order_proportion;
+        option2.series = series_data;
+        myChart1.setOption(option1);
+        myChart2.setOption(option2);
+    });
+
+</script>
+</body>
+
+</html>
